@@ -3,4 +3,6 @@
     <string name="sample_sid">RELIANCE</string>
     <string name="sample_sid_price">₹ 4021</string>
     <string name="sid_price">₹ %s</string>
+    <string name="play">Play</string>
+    <string name="history">History</string>
 </resources>
