@@ -9,11 +9,11 @@ import com.abhishekgupta.stocks.repo.IStocksRepo
 import kotlinx.coroutines.launch
 
 class StocksViewModel(private val repo: IStocksRepo) : ViewModel() {
-    val stocksLiveData: MutableLiveData<List<Stock>> = MutableLiveData()
+    val stocksLiveData: MutableLiveData<Resource<List<Stock>>> = MutableLiveData()
 
     fun getStockQuotes() {
         viewModelScope.launch {
-            Resource.Loading(null)
+            stocksLiveData.value = Resource.Loading(null)
             val (success, data, error, errorType) = repo.getStockQuotes(
                 listOf(
                     "RELI",
@@ -25,9 +25,9 @@ class StocksViewModel(private val repo: IStocksRepo) : ViewModel() {
             )
 
             if (success && data?.isNotEmpty() == true) {
-                Resource.Success(data)
+                stocksLiveData.value = Resource.Success(data)
             } else {
-                Resource.Error("$error - $errorType", data)
+                stocksLiveData.value = Resource.Error("$error - $errorType", data)
             }
 
         }
