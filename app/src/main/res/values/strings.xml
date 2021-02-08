@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Stocks</string>
+    <string name="sample_sid">RELIANCE</string>
+    <string name="sid_price">₹ 4021</string>
 </resources>
