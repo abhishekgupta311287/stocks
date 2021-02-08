@@ -8,7 +8,7 @@ import com.abhishekgupta.stocks.model.Stock
 import com.abhishekgupta.stocks.view.viewholder.BaseViewHolder
 
 class StocksAdapter : RecyclerView.Adapter<BaseViewHolder<Stock>>() {
-    private var stocks: List<Stock> = ArrayList()
+    var stocks: List<Stock> = ArrayList()
         set(value) {
             field = value
             notifyDataSetChanged()
