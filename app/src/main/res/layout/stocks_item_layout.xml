@@ -23,7 +23,7 @@
         android:textColor="@android:color/black"
         app:layout_constraintEnd_toStartOf="@id/changeIcon"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="@string/sid_price" />
+        tools:text="@string/sample_sid_price" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/changeIcon"
