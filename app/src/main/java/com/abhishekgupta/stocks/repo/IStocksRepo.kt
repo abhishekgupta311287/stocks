@@ -1,4 +1,4 @@
-package com.abhishekgupta.stocks.repo.network
+package com.abhishekgupta.stocks.repo
 
 import com.abhishekgupta.stocks.model.Quote
 

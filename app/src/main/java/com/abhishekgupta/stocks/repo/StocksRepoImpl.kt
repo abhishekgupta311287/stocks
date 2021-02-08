@@ -1,6 +1,7 @@
-package com.abhishekgupta.stocks.repo.network
+package com.abhishekgupta.stocks.repo
 
 import com.abhishekgupta.stocks.model.Quote
+import com.abhishekgupta.stocks.repo.network.IStocksApi
 
 class StocksRepoImpl(private val api: IStocksApi) : IStocksRepo {
 
