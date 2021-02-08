@@ -4,12 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="@dimen/item_padding">
+    android:layout_gravity="end"
+    android:padding="@dimen/item_padding"
+    app:layout_constrainedWidth="true">
 
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/sid"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/sid_width"
         android:layout_height="wrap_content"
         android:textColor="@android:color/black"
         app:layout_constraintStart_toStartOf="parent"
@@ -18,19 +20,22 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/price"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/price_width"
         android:layout_height="wrap_content"
+        android:text="@string/sample_sid_price"
+        android:textAlignment="viewEnd"
         android:textColor="@android:color/black"
-        app:layout_constraintEnd_toStartOf="@id/changeIcon"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="@string/sample_sid_price" />
+        app:layout_constraintStart_toEndOf="@+id/sid"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/changeIcon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/change_icon_margin_start"
         android:src="@drawable/green_stock_up_icon"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/price"
         app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="item_padding">10dp</dimen>
+    <dimen name="sid_width">280dp</dimen>
+    <dimen name="price_width">80dp</dimen>
+    <dimen name="change_icon_margin_start">4dp</dimen>
 </resources>

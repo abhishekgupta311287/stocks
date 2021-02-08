@@ -13,6 +13,9 @@
         android:layout_height="match_parent"
         android:background="@android:color/white"
         android:padding="@dimen/item_padding"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:overScrollMode="never"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
