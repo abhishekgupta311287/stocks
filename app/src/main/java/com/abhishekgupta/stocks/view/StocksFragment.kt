@@ -73,12 +73,18 @@ class StocksFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId) {
+        when (item.itemId) {
             R.id.history -> {
 
             }
-            R.id.play ->{
-
+            R.id.play -> {
+                if (viewModel.isPolling) {
+                    viewModel.stopPolling()
+                    item.setIcon(R.drawable.play_menu_icon)
+                } else {
+                    viewModel.pollStockQuotes()
+                    item.setIcon(R.drawable.pause_menu_icon)
+                }
             }
         }
         return super.onOptionsItemSelected(item)

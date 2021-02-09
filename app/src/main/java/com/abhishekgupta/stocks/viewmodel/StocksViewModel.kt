@@ -7,9 +7,12 @@ import com.abhishekgupta.stocks.model.Resource
 import com.abhishekgupta.stocks.model.Stock
 import com.abhishekgupta.stocks.repo.IStocksRepo
 import kotlinx.coroutines.launch
+import java.util.*
 
 class StocksViewModel(private val repo: IStocksRepo) : ViewModel() {
+    var isPolling: Boolean = false
     val stocksLiveData: MutableLiveData<Resource<List<Stock>>> = MutableLiveData()
+    private var timer:Timer? = null
 
     fun getStockQuotes() {
         viewModelScope.launch {
@@ -33,7 +36,23 @@ class StocksViewModel(private val repo: IStocksRepo) : ViewModel() {
         }
     }
 
-    fun listenToStockQuotes() {
-        // TODO : implementation for play button
+    fun pollStockQuotes() {
+        isPolling = true
+        timer = Timer()
+        timer?.scheduleAtFixedRate(object : TimerTask() {
+            override fun run() {
+                getStockQuotes()
+            }
+        }, 0, POLL_INTERVAL)
+
+    }
+
+    fun stopPolling() {
+        timer?.cancel()
+        isPolling = false
+    }
+
+    companion object {
+        private const val POLL_INTERVAL = 5000L // in seconds
     }
 }
