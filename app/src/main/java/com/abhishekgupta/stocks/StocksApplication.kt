@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import androidx.multidex.MultiDex
 import com.abhishekgupta.stocks.di.appModule
+import com.abhishekgupta.stocks.di.dbModule
 import com.abhishekgupta.stocks.di.networkModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -19,6 +20,7 @@ class StocksApplication : Application() {
             modules(
                 listOf(
                     networkModule,
+                    dbModule,
                     appModule
                 )
             )
