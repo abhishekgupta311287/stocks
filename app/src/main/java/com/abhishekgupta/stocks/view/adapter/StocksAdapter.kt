@@ -5,9 +5,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.abhishekgupta.stocks.R
 import com.abhishekgupta.stocks.model.Stock
+import com.abhishekgupta.stocks.view.IStockListener
 import com.abhishekgupta.stocks.view.viewholder.BaseViewHolder
 
-class StocksAdapter : RecyclerView.Adapter<BaseViewHolder<Stock>>() {
+class StocksAdapter(private val listener: IStockListener) : RecyclerView.Adapter<BaseViewHolder<Stock>>() {
     var stocks: List<Stock> = ArrayList()
         set(value) {
             field = value
@@ -20,7 +21,11 @@ class StocksAdapter : RecyclerView.Adapter<BaseViewHolder<Stock>>() {
     }
 
     override fun onBindViewHolder(holder: BaseViewHolder<Stock>, position: Int) {
-        holder.bind(stocks[position])
+        val stock = stocks[position]
+        holder.bind(stock)
+        holder.itemView.setOnClickListener {
+            listener.onStockSelected(stock)
+        }
     }
 
     override fun getItemCount() = stocks.size

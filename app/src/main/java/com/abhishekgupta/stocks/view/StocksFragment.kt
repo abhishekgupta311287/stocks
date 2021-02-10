@@ -8,11 +8,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.abhishekgupta.stocks.R
 import com.abhishekgupta.stocks.databinding.StocksFragmentBinding
 import com.abhishekgupta.stocks.model.Resource
+import com.abhishekgupta.stocks.model.Stock
 import com.abhishekgupta.stocks.view.adapter.StocksAdapter
 import com.abhishekgupta.stocks.viewmodel.StocksViewModel
-import org.koin.android.ext.android.get
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
-class StocksFragment : Fragment() {
+class StocksFragment : Fragment() , IStockListener{
 
     companion object {
         fun newInstance() = StocksFragment()
@@ -21,7 +22,7 @@ class StocksFragment : Fragment() {
     private var _binding: StocksFragmentBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var viewModel: StocksViewModel
+    private val viewModel by sharedViewModel<StocksViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,9 +35,8 @@ class StocksFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = get()
 
-        val adapter = StocksAdapter()
+        val adapter = StocksAdapter(this)
 
         binding.stockRecyclerView.layoutManager = LinearLayoutManager(requireContext())
 
@@ -93,6 +93,10 @@ class StocksFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onStockSelected(stock: Stock) {
+        viewModel.fetchStockHistory(stock)
     }
 
 }

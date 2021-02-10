@@ -1,13 +1,16 @@
 package com.abhishekgupta.stocks.view
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.abhishekgupta.stocks.R
 import com.abhishekgupta.stocks.databinding.StocksActivityBinding
+import com.abhishekgupta.stocks.viewmodel.StocksViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class StocksActivity : AppCompatActivity() {
 
     private lateinit var binding: StocksActivityBinding
+    private val viewModel: StocksViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -17,7 +20,14 @@ class StocksActivity : AppCompatActivity() {
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
                     .replace(R.id.container, StocksFragment.newInstance())
-                    .commitNow()
+                    .commit()
         }
+
+        viewModel.historyLiveData.observe(this, {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.container, HistoryFragment.newInstance())
+                .addToBackStack("HistoryFragment")
+                .commit()
+        })
     }
 }
