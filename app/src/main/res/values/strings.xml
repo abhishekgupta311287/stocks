@@ -10,4 +10,6 @@
     <string name="history_per_change_sample">(+0.48%)</string>
     <string name="chart_price_label">Price (₹)</string>
     <string name="chart_percent_label">(%s%%)</string>
+    <string name="loading_text">Loading…</string>
+    <string name="error_msg">Some thing went wrong !</string>
 </resources>

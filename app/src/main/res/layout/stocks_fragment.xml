@@ -7,14 +7,30 @@
     android:layout_height="match_parent"
     tools:context=".view.StocksFragment">
 
+    <include
+        android:id="@+id/shimmerLayout"
+        layout="@layout/shimmer_effect_layout" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/stockRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@android:color/white"
-        android:padding="@dimen/item_padding"
-        app:layout_constraintBottom_toBottomOf="parent"
         android:overScrollMode="never"
+        android:padding="@dimen/item_padding"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/errorView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/error_msg"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

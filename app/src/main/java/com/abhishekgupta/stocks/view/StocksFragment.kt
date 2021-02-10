@@ -62,12 +62,23 @@ class StocksFragment : Fragment(), IStockListener {
                     it.data?.let { stocks ->
                         adapter.stocks = stocks
                     }
+                    binding.stockRecyclerView.visibility = View.VISIBLE
+                    binding.errorView.visibility = View.INVISIBLE
+                    binding.shimmerLayout.root.hideShimmer()
                 }
                 is Resource.Error -> {
-
+                    if (!viewModel.isPolling) {
+                        binding.stockRecyclerView.visibility = View.INVISIBLE
+                        binding.errorView.visibility = View.VISIBLE
+                        binding.shimmerLayout.root.hideShimmer()
+                    }
                 }
                 is Resource.Loading -> {
-
+                    if (!viewModel.isPolling) {
+                        binding.stockRecyclerView.visibility = View.INVISIBLE
+                        binding.errorView.visibility = View.INVISIBLE
+                        binding.shimmerLayout.root.showShimmer(true)
+                    }
                 }
             }
         })
