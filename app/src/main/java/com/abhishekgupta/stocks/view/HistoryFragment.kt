@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.transition.TransitionInflater
 import com.abhishekgupta.stocks.R
 import com.abhishekgupta.stocks.databinding.HistoryFragmentBinding
 import com.abhishekgupta.stocks.viewmodel.StocksViewModel
@@ -35,6 +36,12 @@ class HistoryFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val viewModel by sharedViewModel<StocksViewModel>()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val inflater = TransitionInflater.from(requireContext())
+        enterTransition = inflater.inflateTransition(R.transition.slide_right)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

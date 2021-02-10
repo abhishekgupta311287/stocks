@@ -5,6 +5,7 @@ import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.transition.TransitionInflater
 import com.abhishekgupta.stocks.R
 import com.abhishekgupta.stocks.databinding.StocksFragmentBinding
 import com.abhishekgupta.stocks.model.Resource
@@ -23,6 +24,12 @@ class StocksFragment : Fragment(), IStockListener {
     private val binding get() = _binding!!
 
     private val viewModel by sharedViewModel<StocksViewModel>()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val inflater = TransitionInflater.from(requireContext())
+        exitTransition = inflater.inflateTransition(R.transition.fade)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
