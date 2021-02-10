@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/history"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/item_padding"
+    tools:context=".view.StocksActivity">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/sidPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/history_margin"
+        android:layout_marginStart="@dimen/history_margin"
+        android:textSize="@dimen/history_price_size"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="@string/history_price_sample" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/sidChangeIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/history_margin"
+        android:layout_marginTop="@dimen/history_margin"
+        android:src="@drawable/green_stock_up_icon"
+        app:layout_constraintStart_toEndOf="@+id/sidPrice"
+        app:layout_constraintTop_toTopOf="@id/sidPrice" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/absoluteChange"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/history_margin"
+        android:textStyle="bold"
+        android:src="@drawable/green_stock_up_icon"
+        app:layout_constraintStart_toEndOf="@+id/sidChangeIcon"
+        app:layout_constraintTop_toTopOf="@id/sidPrice"
+        tools:text="@string/history_abs_change_sample" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/percentChange"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/history_margin"
+        android:layout_marginTop="@dimen/history_margin"
+        android:src="@drawable/green_stock_up_icon"
+        app:layout_constraintStart_toEndOf="@+id/absoluteChange"
+        app:layout_constraintTop_toTopOf="@id/sidPrice"
+        tools:text="@string/history_per_change_sample" />
+
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/lineChart"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/history_chart_height"
+        android:layout_marginTop="@dimen/history_margin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sidPrice" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

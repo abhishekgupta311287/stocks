@@ -5,4 +5,9 @@
     <string name="sid_price">₹ %s</string>
     <string name="play">Play</string>
     <string name="history">History</string>
+    <string name="history_price_sample">1125.25</string>
+    <string name="history_abs_change_sample">24.58</string>
+    <string name="history_per_change_sample">(+0.48%)</string>
+    <string name="chart_price_label">Price (₹)</string>
+    <string name="chart_percent_label">(%s%%)</string>
 </resources>

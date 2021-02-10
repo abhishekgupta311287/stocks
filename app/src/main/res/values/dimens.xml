@@ -4,4 +4,8 @@
     <dimen name="sid_width">280dp</dimen>
     <dimen name="price_width">80dp</dimen>
     <dimen name="change_icon_margin_start">4dp</dimen>
+    <dimen name="history_price_size">24sp</dimen>
+    <dimen name="history_chart_height">360dp</dimen>
+    <dimen name="history_margin">10dp</dimen>
+
 </resources>
