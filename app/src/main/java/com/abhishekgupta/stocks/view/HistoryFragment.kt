@@ -75,8 +75,9 @@ class HistoryFragment : Fragment() {
                     data = LineData(dataSet)
                 }
                 description.isEnabled = false
+                offsetTopAndBottom(20)
                 setScaleEnabled(false)
-                animateX(1500)
+                animateX(150*entries.size)
                 xAxis.apply {
                     setDrawGridLines(false)
                     setDrawAxisLine(true)
@@ -86,6 +87,8 @@ class HistoryFragment : Fragment() {
                 axisLeft.apply {
                     setDrawGridLines(false)
                     setDrawAxisLine(true)
+                    spaceBottom = 20f
+                    spaceTop = 20f
                     labelCount = 10
                 }
                 axisRight.apply {

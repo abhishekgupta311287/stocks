@@ -13,7 +13,7 @@ import com.abhishekgupta.stocks.view.adapter.StocksAdapter
 import com.abhishekgupta.stocks.viewmodel.StocksViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
-class StocksFragment : Fragment() , IStockListener{
+class StocksFragment : Fragment(), IStockListener {
 
     companion object {
         fun newInstance() = StocksFragment()
@@ -70,6 +70,13 @@ class StocksFragment : Fragment() , IStockListener{
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu, menu)
+        menu.findItem(R.id.play).setIcon(
+            if (viewModel.isPolling) {
+                R.drawable.pause_menu_icon
+            } else {
+                R.drawable.play_menu_icon
+            }
+        )
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
