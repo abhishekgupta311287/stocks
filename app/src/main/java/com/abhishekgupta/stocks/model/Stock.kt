@@ -13,6 +13,6 @@ data class Stock(
     val change: Float,
     val high: Float,
     val low: Float,
-    val volume: Float,
+    val volume: Long,
     val date: String
 )
