@@ -20,6 +20,15 @@ class HistoryFragment : Fragment() {
 
     companion object {
         fun newInstance() = HistoryFragment()
+
+        private const val ANIMATE_DURATION_PER_ENTRY = 150 // milliseconds
+        private const val PERCENT_MULTIPLIER = 100
+        private const val CHART_X_INTERVAL = 5.0f
+        private const val TOP_BOTTOM_SPACE = 20f
+        private const val LABEL_COUNT = 10
+        private const val CUBIC_INTENSITY = 0.2f
+        private const val LINE_WIDTH = 1.8f
+        private const val FILL_ALPHA = 15
     }
 
     private var _binding: HistoryFragmentBinding? = null
@@ -40,13 +49,13 @@ class HistoryFragment : Fragment() {
 
         viewModel.historyLiveData.observe(viewLifecycleOwner, {
 
-            val latestStock = it[it.size-1]
+            val latestStock = it[it.size - 1]
             binding.sidPrice.text = latestStock.price.toString()
             binding.absoluteChange.text = latestStock.change.toString()
 
             binding.percentChange.text = getString(
                 R.string.chart_percent_label,
-                String.format("%.2f", latestStock.change * 100 / latestStock.price)
+                String.format("%.2f", latestStock.change * PERCENT_MULTIPLIER / latestStock.price)
             )
 
             val isChangePositive = latestStock.change > 0
@@ -63,7 +72,7 @@ class HistoryFragment : Fragment() {
 
             var x = 0.0f
             val entries: List<Entry> = it.map { stock ->
-                x += 5.0f
+                x += CHART_X_INTERVAL
                 Entry(x, stock.price)
             }
 
@@ -75,9 +84,9 @@ class HistoryFragment : Fragment() {
                     data = LineData(dataSet)
                 }
                 description.isEnabled = false
-                offsetTopAndBottom(20)
+                offsetTopAndBottom(TOP_BOTTOM_SPACE.toInt())
                 setScaleEnabled(false)
-                animateX(150*entries.size)
+                animateX(ANIMATE_DURATION_PER_ENTRY * entries.size)
                 xAxis.apply {
                     setDrawGridLines(false)
                     setDrawAxisLine(true)
@@ -87,9 +96,9 @@ class HistoryFragment : Fragment() {
                 axisLeft.apply {
                     setDrawGridLines(false)
                     setDrawAxisLine(true)
-                    spaceBottom = 20f
-                    spaceTop = 20f
-                    labelCount = 10
+                    spaceBottom = TOP_BOTTOM_SPACE
+                    spaceTop = TOP_BOTTOM_SPACE
+                    labelCount = LABEL_COUNT
                 }
                 axisRight.apply {
                     setDrawGridLines(false)
@@ -112,11 +121,11 @@ class HistoryFragment : Fragment() {
                 Color.RED
             }
             fillColor = color
-            fillAlpha = 15
+            fillAlpha = FILL_ALPHA
 
             mode = LineDataSet.Mode.CUBIC_BEZIER
-            cubicIntensity = 0.2f
-            lineWidth = 1.8f
+            cubicIntensity = CUBIC_INTENSITY
+            lineWidth = LINE_WIDTH
         }
     }
 
