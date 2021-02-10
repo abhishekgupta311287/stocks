@@ -62,28 +62,43 @@ class StocksFragment : Fragment(), IStockListener {
                     it.data?.let { stocks ->
                         adapter.stocks = stocks
                     }
-                    binding.stockRecyclerView.visibility = View.VISIBLE
-                    binding.errorView.visibility = View.INVISIBLE
-                    binding.shimmerLayout.root.hideShimmer()
+                    successUI()
                 }
                 is Resource.Error -> {
                     if (!viewModel.isPolling) {
-                        binding.stockRecyclerView.visibility = View.INVISIBLE
-                        binding.errorView.visibility = View.VISIBLE
-                        binding.shimmerLayout.root.hideShimmer()
+                        errorUI()
                     }
                 }
                 is Resource.Loading -> {
                     if (!viewModel.isPolling) {
-                        binding.stockRecyclerView.visibility = View.INVISIBLE
-                        binding.errorView.visibility = View.INVISIBLE
-                        binding.shimmerLayout.root.showShimmer(true)
+                        loadingUI()
                     }
                 }
             }
         })
 
         viewModel.getStockQuotes()
+    }
+
+    private fun loadingUI() {
+        binding.stockRecyclerView.visibility = View.INVISIBLE
+        binding.errorView.visibility = View.INVISIBLE
+        binding.shimmerLayout.root.visibility = View.VISIBLE
+        binding.shimmerLayout.root.showShimmer(true)
+    }
+
+    private fun errorUI() {
+        binding.stockRecyclerView.visibility = View.INVISIBLE
+        binding.errorView.visibility = View.VISIBLE
+        binding.shimmerLayout.root.visibility = View.INVISIBLE
+        binding.shimmerLayout.root.hideShimmer()
+    }
+
+    private fun successUI() {
+        binding.stockRecyclerView.visibility = View.VISIBLE
+        binding.errorView.visibility = View.INVISIBLE
+        binding.shimmerLayout.root.visibility = View.INVISIBLE
+        binding.shimmerLayout.root.hideShimmer()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
