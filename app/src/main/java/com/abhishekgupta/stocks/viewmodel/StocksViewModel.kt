@@ -68,6 +68,16 @@ class StocksViewModel(private val repo: IStocksRepo) : ViewModel() {
         }
     }
 
+    fun fetchExpensiveStockHistory() {
+        viewModelScope.launch {
+            val data = stocksLiveData.value?.data
+            data?.maxByOrNull { it.price }?.also {
+                historyLiveData.value = repo.getStockHistory(it)
+
+            }
+        }
+    }
+
     companion object {
         private const val POLL_INTERVAL = 5000L // in seconds
     }

@@ -82,7 +82,7 @@ class StocksFragment : Fragment(), IStockListener {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.history -> {
-
+                viewModel.fetchExpensiveStockHistory()
             }
             R.id.play -> {
                 if (viewModel.isPolling) {
