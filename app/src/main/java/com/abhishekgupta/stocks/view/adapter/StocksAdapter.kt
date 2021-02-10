@@ -12,7 +12,7 @@ class StocksAdapter(private val listener: IStockListener) : RecyclerView.Adapter
     var stocks: List<Stock> = ArrayList()
         set(value) {
             field = value
-            notifyDataSetChanged()
+            notifyItemRangeChanged(0, field.size)
         }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<Stock> {
