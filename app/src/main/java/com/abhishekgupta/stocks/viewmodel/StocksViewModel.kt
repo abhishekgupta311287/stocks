@@ -10,9 +10,18 @@ import kotlinx.coroutines.launch
 import java.util.*
 
 class StocksViewModel(private val repo: IStocksRepo) : ViewModel() {
+
+    init {
+        viewModelScope.launch {
+            repo.deleteAll()
+        }
+    }
+
     var isPolling: Boolean = false
     val stocksLiveData: MutableLiveData<Resource<List<Stock>>> = MutableLiveData()
-    private var timer:Timer? = null
+    val historyLiveData: MutableLiveData<List<Stock>> = MutableLiveData()
+
+    private var timer: Timer? = null
 
     fun getStockQuotes() {
         viewModelScope.launch {
@@ -24,7 +33,8 @@ class StocksViewModel(private val repo: IStocksRepo) : ViewModel() {
                     "ITC",
                     "HDBK",
                     "INFY"
-                )
+                ),
+                isPolling
             )
 
             if (success && data?.isNotEmpty() == true) {
@@ -50,6 +60,12 @@ class StocksViewModel(private val repo: IStocksRepo) : ViewModel() {
     fun stopPolling() {
         timer?.cancel()
         isPolling = false
+    }
+
+    fun fetchStockHistory(stock: Stock) {
+        viewModelScope.launch {
+            historyLiveData.value = repo.getStockHistory(stock)
+        }
     }
 
     companion object {
