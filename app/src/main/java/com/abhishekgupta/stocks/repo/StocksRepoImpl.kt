@@ -4,6 +4,7 @@ import com.abhishekgupta.stocks.model.Quote
 import com.abhishekgupta.stocks.model.Stock
 import com.abhishekgupta.stocks.repo.db.IStocksHistoryDao
 import com.abhishekgupta.stocks.repo.network.IStocksApi
+import retrofit2.HttpException
 
 class StocksRepoImpl(
     private val api: IStocksApi,
@@ -11,19 +12,22 @@ class StocksRepoImpl(
 ) : IStocksRepo {
 
     override suspend fun getStockQuotes(sidsList: List<String>, isPolling: Boolean): Quote {
-        var sids = ""
+        return try {
+            var sids = ""
 
-        sidsList.forEach { sid ->
-            sids += "$sid,"
+            sidsList.forEach { sid ->
+                sids += "$sid,"
+            }
+
+            val quote = api.getStockQuotes(sids)
+
+            if (isPolling && quote.success && quote.data?.isNotEmpty() == true) {
+                dao.insertStocks(quote.data)
+            }
+            quote
+        } catch (e: HttpException) {
+            Quote(false, null, "Http Error - ${e.code()}", null)
         }
-
-        val quotes = api.getStockQuotes(sids)
-
-        if (isPolling && quotes.success && quotes.data?.isNotEmpty() == true) {
-            dao.insertStocks(quotes.data)
-        }
-
-        return quotes
     }
 
     override suspend fun getStockHistory(stock: Stock): List<Stock> {
