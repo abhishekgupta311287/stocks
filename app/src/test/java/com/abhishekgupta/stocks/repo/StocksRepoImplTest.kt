@@ -49,14 +49,6 @@ class StocksRepoImplTest {
         null
     )
 
-    @Before
-    fun setUp() {
-    }
-
-    @After
-    fun tearDown() {
-    }
-
     @Test
     fun `verify stocks api call when not polling`() = runBlockingTest {
         val repo = StocksRepoImpl(api, dao)
