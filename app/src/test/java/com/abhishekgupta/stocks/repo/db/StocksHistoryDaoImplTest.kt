@@ -31,13 +31,6 @@ class StocksHistoryDaoImplTest {
     )
     private val stocks = listOf(stock)
 
-    private val quote = Quote(
-        true,
-        stocks,
-        null,
-        null
-    )
-
     @Test
     fun `verify get stock history`() = runBlockingTest {
         val dao = StocksHistoryDaoImpl(dbDao)
