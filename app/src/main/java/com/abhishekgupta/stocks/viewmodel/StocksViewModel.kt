@@ -79,6 +79,6 @@ class StocksViewModel(private val repo: IStocksRepo) : ViewModel() {
     }
 
     companion object {
-        private const val POLL_INTERVAL = 5000L // in seconds
+        internal const val POLL_INTERVAL = 5000L // in seconds
     }
 }
