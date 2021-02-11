@@ -139,7 +139,7 @@ class StocksViewModelTest {
     }
 
     @Test
-    fun `verify start and stop polling of quotes`() = runBlocking{
+    fun `verify start and stop polling of quotes`() = runBlocking {
 
         val viewModel = StocksViewModel(repo)
 
@@ -163,33 +163,35 @@ class StocksViewModelTest {
 
         Assert.assertTrue(viewModel.isPolling)
 
-        coVerify(atLeast = 2) {  repo.getStockQuotes(
-            listOf(
-                "RELI",
-                "TCS",
-                "ITC",
-                "HDBK",
-                "INFY"
-            ), true
-        )
+        coVerify(atLeast = 2) {
+            repo.getStockQuotes(
+                listOf(
+                    "RELI",
+                    "TCS",
+                    "ITC",
+                    "HDBK",
+                    "INFY"
+                ), true
+            )
         }
 
         viewModel.stopPolling()
         Assert.assertFalse(viewModel.isPolling)
-        coVerify(atMost = 2) {  repo.getStockQuotes(
-            listOf(
-                "RELI",
-                "TCS",
-                "ITC",
-                "HDBK",
-                "INFY"
-            ), true
-        )
+        coVerify(atMost = 2) {
+            repo.getStockQuotes(
+                listOf(
+                    "RELI",
+                    "TCS",
+                    "ITC",
+                    "HDBK",
+                    "INFY"
+                ), true
+            )
         }
     }
 
     @Test
-    fun `verify stocks history`() = runBlockingTest{
+    fun `verify stocks history`() = runBlockingTest {
         val viewModel = StocksViewModel(repo)
 
         coEvery { repo.getStockHistory(stock) }.returns(stocks)
@@ -214,7 +216,7 @@ class StocksViewModelTest {
     @Test
     fun `verify expensive stock history`() = runBlockingTest {
         val viewModel = StocksViewModel(repo)
-        val stock2 = stock.copy(sid = "RELI", price =4000.0f)
+        val stock2 = stock.copy(sid = "RELI", price = 4000.0f)
         coEvery {
             repo.getStockQuotes(
                 listOf(
@@ -225,10 +227,14 @@ class StocksViewModelTest {
                     "INFY"
                 ), false
             )
-        }.returns(quote.copy(data = listOf(
-            stock,
-            stock2
-        )))
+        }.returns(
+            quote.copy(
+                data = listOf(
+                    stock,
+                    stock2
+                )
+            )
+        )
 
         viewModel.getStockQuotes()
 
