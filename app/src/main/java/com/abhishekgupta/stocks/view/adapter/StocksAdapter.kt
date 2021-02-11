@@ -8,7 +8,8 @@ import com.abhishekgupta.stocks.model.Stock
 import com.abhishekgupta.stocks.view.IStockListener
 import com.abhishekgupta.stocks.view.viewholder.BaseViewHolder
 
-class StocksAdapter(private val listener: IStockListener) : RecyclerView.Adapter<BaseViewHolder<Stock>>() {
+class StocksAdapter(private val listener: IStockListener) :
+    RecyclerView.Adapter<BaseViewHolder<Stock>>() {
     var stocks: List<Stock> = ArrayList()
         set(value) {
             field = value

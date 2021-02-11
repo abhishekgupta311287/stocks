@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "stocks_history")
 data class Stock(
     @PrimaryKey(autoGenerate = true)
-    val id:Int?,
+    val id: Int?,
     val sid: String,
     val price: Float,
     val close: Float,

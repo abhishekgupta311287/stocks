@@ -4,5 +4,5 @@ import com.abhishekgupta.stocks.model.Stock
 
 
 interface IStockListener {
-    fun onStockSelected(stock:Stock)
+    fun onStockSelected(stock: Stock)
 }

@@ -19,8 +19,8 @@ class StocksActivity : AppCompatActivity() {
 
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                    .replace(R.id.container, StocksFragment.newInstance())
-                    .commit()
+                .replace(R.id.container, StocksFragment.newInstance())
+                .commit()
         }
 
         viewModel.historyLiveData.observe(this, {

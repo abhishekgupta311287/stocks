@@ -7,7 +7,7 @@ import com.abhishekgupta.stocks.model.Stock
 interface IStocksHistoryDBDao {
 
     @Query("SELECT * FROM stocks_history where sid = :sid order by id desc limit 10")
-    suspend fun getStockHistory(sid:String): List<Stock>
+    suspend fun getStockHistory(sid: String): List<Stock>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(stock: Stock)
